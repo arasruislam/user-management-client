@@ -1,11 +1,21 @@
 import { Link } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import UsersCard from "./UsersCard";
 
 const Users = () => {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/users")
+      .then((res) => res.json())
+      .then((data) => setUsers(data));
+  }, []);
+
   return (
     <div className="sm:mx-w-md md:max-w-xl lg:max-w-screen-lg mx-auto">
       <div className="mt-16">
-        <Link to='/new_user'>
+        <Link to="/new_user">
           <button className="btn rounded-none border-none shadow hover:bg-white bg-white text-purple-500">
             New User <FaUser />
           </button>
@@ -30,20 +40,9 @@ const Users = () => {
             </thead>
             <tbody>
               {/* row 1 */}
-              <tr className="hover">
-                {/* Id */}
-                <th>1</th>
-                {/* Name */}
-                <td>David Miller</td>
-                {/* Gmail */}
-                <td>asruthecoder@gmail.com</td>
-                {/* Gender */}
-                <td>Male</td>
-                {/* Status */}
-                <td>Active</td>
-                {/* Active */}
-                <td>Button</td>
-              </tr>
+              {users.map((user, i) => (
+                <UsersCard key={user._id} user={user} index={i+1} />
+              ))}
             </tbody>
           </table>
         </div>
