@@ -2,13 +2,29 @@ import { FaArrowAltCircleLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const NewUser = () => {
-  const newUser = (e) => {
+
+  const newUserHandler = (e) => {
     e.preventDefault();
 
     const form = e.target;
-    const radio = form.radio.value;
-    console.log(radio);
+    const name = form.name.value;
+    const email = form.email.value;
+    const gender = form.gender.value;
+    const status = form.status.value;
+    const newUser = { name, email, gender, status };
+    console.log(newUser);
+
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newUser),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
   };
+
   return (
     <div className="sm:mx-w-md md:max-w-xl lg:max-w-screen-lg mx-auto">
       <div className="mt-12">
@@ -29,7 +45,7 @@ const NewUser = () => {
 
         {/* Form */}
         <div>
-          <form onSubmit={newUser} className="card w-full bg-base-100">
+          <form onSubmit={newUserHandler} className="card w-full bg-base-100">
             <div className="card-body">
               {/* name */}
               <div className="form-control">
@@ -45,7 +61,7 @@ const NewUser = () => {
                   className="input input-bordered"
                 />
               </div>
-              {/* emaiil */}
+              {/* email */}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text text-lg font-semibold text-gray-500">
@@ -102,7 +118,7 @@ const NewUser = () => {
                   <div className="flex gap-2 text-lg font-semibold items-center">
                     <input
                       type="radio"
-                      name="active"
+                      name="status"
                       className="radio radio-success"
                       value="Active"
                     />
@@ -112,7 +128,7 @@ const NewUser = () => {
                   <div className="flex gap-2 text-lg font-semibold items-center">
                     <input
                       type="radio"
-                      name="active"
+                      name="status"
                       className="radio radio-success"
                       value="Female"
                     />
@@ -122,7 +138,9 @@ const NewUser = () => {
               </div>
 
               <div className="form-control mt-6">
-                <button className="btn bg-emerald-500 border-none hover:bg-emerald-400 transition-all duration-300 text-lg">Save</button>
+                <button className="btn bg-emerald-500 border-none hover:bg-emerald-400 transition-all duration-300 text-lg">
+                  Save
+                </button>
               </div>
             </div>
           </form>
