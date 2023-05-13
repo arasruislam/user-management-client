@@ -3,7 +3,7 @@ import { Link, useLoaderData } from "react-router-dom";
 
 const UpdateUser = () => {
   const loadedUser = useLoaderData();
-  console.log(loadedUser);
+
   const updateUserHandler = (e) => {
     e.preventDefault();
 
@@ -13,8 +13,23 @@ const UpdateUser = () => {
     const gender = form.gender.value;
     const status = form.status.value;
     const newUser = { name, email, gender, status };
-    console.log(newUser);
+
+    const process = confirm("Are Your Sure");
+    if (process) {
+      fetch(`http://localhost:5000/users/${loadedUser._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newUser),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        });
+    }
   };
+
   return (
     <div className="sm:mx-w-md md:max-w-xl lg:max-w-screen-lg mx-auto">
       <div className="mt-12">
@@ -52,6 +67,7 @@ const UpdateUser = () => {
                   type="text"
                   placeholder="name"
                   className="input input-bordered"
+                  defaultValue={loadedUser?.name}
                 />
               </div>
               {/* email */}
@@ -66,6 +82,7 @@ const UpdateUser = () => {
                   type="text"
                   placeholder="e-mail"
                   className="input input-bordered"
+                  defaultValue={loadedUser?.email}
                 />
               </div>
               {/* Gender */}
@@ -123,7 +140,7 @@ const UpdateUser = () => {
                       type="radio"
                       name="status"
                       className="radio radio-success"
-                      value="Female"
+                      value="Inactive"
                     />
                     <label>Inactive</label>
                   </div>

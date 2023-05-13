@@ -2,7 +2,6 @@ import { FaArrowAltCircleLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const NewUser = () => {
-
   const newUserHandler = (e) => {
     e.preventDefault();
 
@@ -12,7 +11,6 @@ const NewUser = () => {
     const gender = form.gender.value;
     const status = form.status.value;
     const newUser = { name, email, gender, status };
-    console.log(newUser);
 
     fetch("http://localhost:5000/users", {
       method: "POST",
@@ -130,7 +128,7 @@ const NewUser = () => {
                       type="radio"
                       name="status"
                       className="radio radio-success"
-                      value="Female"
+                      value="Inactive"
                     />
                     <label>Inactive</label>
                   </div>

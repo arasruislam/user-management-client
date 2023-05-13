@@ -10,7 +10,23 @@ const Users = () => {
     fetch("http://localhost:5000/users")
       .then((res) => res.json())
       .then((data) => setUsers(data));
-  }, []);
+  }, [users]);
+
+  const deleteUserManager = (_id) => {
+    const process = confirm("Are Your Sure You Want To Delete This manager😢")
+    if (process) {
+      fetch(`http://localhost:5000/users/${_id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        });
+    }
+  };
 
   return (
     <div className="sm:mx-w-md md:max-w-xl lg:max-w-screen-lg mx-auto">
@@ -41,7 +57,12 @@ const Users = () => {
             <tbody>
               {/* row 1 */}
               {users.map((user, i) => (
-                <UsersCard key={user._id} user={user} index={i+1} />
+                <UsersCard
+                  key={user._id}
+                  user={user}
+                  index={i + 1}
+                  deleteUserManager={deleteUserManager}
+                />
               ))}
             </tbody>
           </table>

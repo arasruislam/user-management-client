@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { HiOutlinePencil, HiXMark } from "react-icons/hi2";
 
-const UsersCard = ({ user, index }) => {
+const UsersCard = ({ user, index, deleteUserManager }) => {
   return (
     <tr className="hover">
       {/* Id */}
@@ -22,7 +22,10 @@ const UsersCard = ({ user, index }) => {
           </button>
         </Link>
         <Link>
-          <button className="bg-white shadow p-2 rounded-lg hover:scale-110 transition-all duration-300">
+          <button
+            onClick={() => deleteUserManager(user?._id)}
+            className="bg-white shadow p-2 rounded-lg hover:scale-110 transition-all duration-300"
+          >
             <HiXMark className="h-6 w-6 text-purple-500" />
           </button>
         </Link>
