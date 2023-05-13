@@ -16,13 +16,16 @@ const UpdateUser = () => {
 
     const process = confirm("Are Your Sure");
     if (process) {
-      fetch(`http://localhost:5000/users/${loadedUser._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newUser),
-      })
+      fetch(
+        `https://user-management-server-one.vercel.app/users/${loadedUser._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newUser),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log(data);

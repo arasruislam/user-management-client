@@ -7,15 +7,15 @@ const Users = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/users")
+    fetch("https://user-management-server-one.vercel.app/users")
       .then((res) => res.json())
       .then((data) => setUsers(data));
   }, [users]);
 
   const deleteUserManager = (_id) => {
-    const process = confirm("Are Your Sure You Want To Delete This manager😢")
+    const process = confirm("Are Your Sure You Want To Delete This manager😢");
     if (process) {
-      fetch(`http://localhost:5000/users/${_id}`, {
+      fetch(`https://user-management-server-one.vercel.app/users/${_id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
