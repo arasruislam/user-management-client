@@ -17,7 +17,7 @@ const UpdateUser = () => {
     const process = confirm("Are Your Sure");
     if (process) {
       fetch(
-        `https://user-management-server-one.vercel.app/users/${loadedUser._id}`,
+        `https://user-management-server-asru-islam.vercel.app/users/${loadedUser._id}`,
         {
           method: "PUT",
           headers: {

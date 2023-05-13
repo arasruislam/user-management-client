@@ -12,7 +12,7 @@ const NewUser = () => {
     const status = form.status.value;
     const newUser = { name, email, gender, status };
 
-    fetch("https://user-management-server-one.vercel.app/users", {
+    fetch("https://user-management-server-asru-islam.vercel.app/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
